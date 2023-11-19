@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">HewahBnB</string>
+    <string name="email">Email</string>
+    <string name="hewabnbLogo">HewaBnB Logo</string>
+    <string name="hewaBnB">HewaBnB</string>
+    <string name="email_address">Email Address</string>
+    <string name="fullName">FullName</string>
+    <string name="enter_fullName">Enter FullName</string>
+    <string name="mpesaNumber">Mpesa Number</string>
+    <string name="enter_mpesaNumber">Enter Mpesa Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="enter_confirmPassword">Confirm Password</string>
+    <string name="enter_email_address">Enter Email Address</string>
+    <string name="signUp">Sign Up</string>
+    <string name="createAccount">CREATE ACCOUNT</string>
+    <string name="login_instead">Login Instead</string>
 </resources>
