@@ -7,7 +7,7 @@
     <string name="fullName">FullName</string>
     <string name="enter_fullName">Enter FullName</string>
     <string name="mpesaNumber">Mpesa Number</string>
-    <string name="enter_mpesaNumber">Enter Mpesa Number</string>
+    <string name="enter_mpesaNumber">Enter MpesaNumber</string>
     <string name="enter_password">Enter Password</string>
     <string name="password">Password</string>
     <string name="confirmPassword">Confirm Password</string>

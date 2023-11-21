@@ -12,3 +12,23 @@ fun showToast(context: android.content.Context, message: String) {
     )
     toast.show()
 }
+
+const val LOGIN_SCREEN = "login"
+
+const val SIGNUP_SCREEN = "signUp"
+
+const val HOME_SCREEN = "home"
+
+//const val HB_BASE_API_Endpoints = "http://localhost:1337/parse"
+
+
+const val APP_ID = "myAppId"
+const val MASTER_KEY = "main-key-1-!"
+const val BASE_SERVER_URL = "  https://hewabnb-server.onrender.com/parse"
+
+sealed class HBAPIEndpoints(val url: String) {
+
+    object Users: HBAPIEndpoints(url = "$BASE_SERVER_URL/users")
+
+    object AllMessages: HBAPIEndpoints(url = "$BASE_SERVER_URL/api/messages")
+}
