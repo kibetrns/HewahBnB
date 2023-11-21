@@ -29,7 +29,8 @@ fun SetUpNavigation(navController: NavHostController, hbViewModel: HBViewModel) 
 
         loginScreen(
             hbViewModel = hbViewModel,
-            navigateToHomeScreen = {}
+            navigateToHomeScreen = screen.home,
+            navigateToSignUpScreen = screen.signUp
         )
 
         homeScreen(

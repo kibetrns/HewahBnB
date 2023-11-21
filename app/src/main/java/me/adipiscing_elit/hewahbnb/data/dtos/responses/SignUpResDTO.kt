@@ -10,6 +10,6 @@ data class SignUpResDTO(
     val createdAt: String,
     @SerialName("objectId")
     val objectId: String,
-    @SerialName("sessionToken")
+    @SerialName("loggedInUser")
     val sessionToken: String
 )

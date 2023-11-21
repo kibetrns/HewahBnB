@@ -28,7 +28,15 @@ const val BASE_SERVER_URL = "  https://hewabnb-server.onrender.com/parse"
 
 sealed class HBAPIEndpoints(val url: String) {
 
-    object Users: HBAPIEndpoints(url = "$BASE_SERVER_URL/users")
+    object SignUpUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/users")
 
-    object AllMessages: HBAPIEndpoints(url = "$BASE_SERVER_URL/api/messages")
+    object LoginUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/login")
+}
+
+sealed class ServiceResult<T>(
+    val data: T? = null,
+    val message: String? = null
+) {
+    class Success<T>(data: T) : ServiceResult<T>(data)
+    class Failure<T>(message: String? = null) : ServiceResult<T>(message = message)
 }

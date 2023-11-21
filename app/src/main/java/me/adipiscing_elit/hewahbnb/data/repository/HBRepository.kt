@@ -1,6 +1,7 @@
 package me.adipiscing_elit.hewahbnb.data.repository
 
 import dagger.hilt.android.scopes.ViewModelScoped
+import me.adipiscing_elit.hewahbnb.data.dtos.responses.LoginResDTO
 import me.adipiscing_elit.hewahbnb.data.dtos.responses.SignUpResDTO
 import me.adipiscing_elit.hewahbnb.data.service.HBService
 import javax.inject.Inject
@@ -26,11 +27,11 @@ class HBRepository @Inject constructor(
     }
 
     suspend fun login(
-        email: String,
+        userName: String,
         password: String
-    ) {
+    ): LoginResDTO? {
         return hBService.login(
-            email = email,
+            userName = userName,
             password = password
         )
     }
