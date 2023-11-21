@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    kotlin("plugin.serialization") version "1.8.0"
 }
 
 android {
@@ -20,6 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
     }
 
     buildTypes {
@@ -93,7 +95,7 @@ dependencies {
     implementation ("io.ktor:ktor-client-logging:$ktor_version")
 
     //Kotlinx-Serialization
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
     //Kotlin datetime
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
