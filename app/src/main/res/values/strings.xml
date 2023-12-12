@@ -20,4 +20,8 @@
     <string name="signUp_instead">Create one instead</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="loginn">Login</string>
+    <string name="house_image">House Image</string>
+    <string name="favorite_button">Add to farourites button\n</string>
+    <string name="ratingScore">Rating Score\n</string>
+    <string name="location_icon">Location Icon</string>
 </resources>
