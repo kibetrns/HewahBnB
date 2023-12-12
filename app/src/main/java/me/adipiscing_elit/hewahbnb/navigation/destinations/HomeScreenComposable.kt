@@ -6,6 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import me.adipiscing_elit.hewahbnb.ui.HomeScreen
 import me.adipiscing_elit.hewahbnb.util.HOME_SCREEN
 import me.adipiscing_elit.hewahbnb.viewmodel.HBViewModel
 
@@ -17,8 +18,6 @@ fun NavGraphBuilder.homeScreen(
         route = HOME_SCREEN,
     ) {
 
-        //TODO("Home Screen Design")
-
-        Text(text = "Home Screen Coming Soon :)", style = MaterialTheme.typography.titleLarge)
+        HomeScreen()
     }
 }
