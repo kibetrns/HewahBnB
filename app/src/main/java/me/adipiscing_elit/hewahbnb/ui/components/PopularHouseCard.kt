@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -48,6 +50,8 @@ fun PopularHouseCard(
 ) {
     Column(
         modifier = Modifier
+            .padding(horizontal = 8.dp, vertical = 0.dp)
+            .size(width = 300.dp, height = 500.dp)
             .background(
             color = Color.Unspecified,
             shape = MaterialTheme.shapes.medium.copy(
@@ -55,7 +59,7 @@ fun PopularHouseCard(
                 bottomStart = CornerSize(8.dp),
                 topEnd = CornerSize(8.dp),
                 topStart = CornerSize(8.dp)
-            )
+            ),
         ),
     ) {
         HouseImageContainer(house = house,
@@ -70,6 +74,7 @@ fun PopularHouseCard(
         Column(
             modifier = Modifier
                 .border(BorderStroke(width = 1.dp, color = Color.Black))
+
         ) {
             Column(
                 modifier = Modifier
@@ -96,11 +101,30 @@ fun PopularHouseCard(
                     }
                 }
 
-                Spacer(Modifier.height(8.dp))
+                Spacer(
+                    Modifier
+                        .height(8.dp)
+                        .padding(8.dp)
+                )
 
                 Text(text = house.locationName, style = MaterialTheme.typography.labelLarge)
 
-                //TODO("Add Line separator")
+                Spacer(
+                    Modifier
+                        .height(8.dp)
+                        .padding(8.dp)
+                )
+
+                Divider(
+                    color = Color.LightGray,
+                    thickness = 1.dp,
+                )
+
+                Spacer(
+                    Modifier
+                        .height(8.dp)
+                        .padding(8.dp)
+                )
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -117,9 +141,16 @@ fun PopularHouseCard(
                                 .size(16.dp)
                         )
                         //TODO("Dynamically have this calculated)
-                        Text(text = "2KM From Your Location")
+                        Text(
+                            text = "2KM From Your Location",
+                            style = MaterialTheme.typography.labelSmall
+                        )
                     }
-                    Text(text = "KES ${house.amount}", color = Color(0xFFF82500))
+                    Text(
+                        text = "KES ${house.amount}",
+                        color = Color(0xFFF82500),
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             }
         }
