@@ -18,6 +18,8 @@ fun NavGraphBuilder.homeScreen(
         route = HOME_SCREEN,
     ) {
 
-        HomeScreen()
+        HomeScreen(
+            hbViewModel = hbViewModel
+        )
     }
 }

@@ -1,6 +1,7 @@
 package me.adipiscing_elit.hewahbnb.util
 
 import android.widget.Toast
+import androidx.compose.ui.unit.dp
 
 fun showToast(context: android.content.Context, message: String) {
     val density = context.resources.displayMetrics.density
@@ -40,3 +41,19 @@ sealed class ServiceResult<T>(
     class Success<T>(data: T) : ServiceResult<T>(data)
     class Failure<T>(message: String? = null) : ServiceResult<T>(message = message)
 }
+
+
+enum class SearchAppBarState {
+    OPENED,
+    CLOSED,
+    TRIGGERED
+}
+
+enum class TrailingIconState {
+    READY_TO_DELETE,
+    READY_TO_CLOSE
+}
+
+val TOP_APP_BAR_HEIGHT = 56.dp
+
+val TONAL_ELEVATION = 8.dp
