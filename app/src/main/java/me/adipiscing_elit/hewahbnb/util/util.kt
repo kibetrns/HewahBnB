@@ -1,6 +1,7 @@
 package me.adipiscing_elit.hewahbnb.util
 
 import android.widget.Toast
+import androidx.compose.ui.unit.dp
 
 fun showToast(context: android.content.Context, message: String) {
     val density = context.resources.displayMetrics.density
@@ -13,7 +14,7 @@ fun showToast(context: android.content.Context, message: String) {
     toast.show()
 }
 
-const val LOGIN_SCREEN = "login"
+const val LOGIN_SCREEN = "Login"
 
 const val SIGNUP_SCREEN = "signUp"
 
@@ -30,7 +31,7 @@ sealed class HBAPIEndpoints(val url: String) {
 
     object SignUpUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/users")
 
-    object LoginUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/login")
+    object LoginUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/Login")
 }
 
 sealed class ServiceResult<T>(
@@ -40,3 +41,19 @@ sealed class ServiceResult<T>(
     class Success<T>(data: T) : ServiceResult<T>(data)
     class Failure<T>(message: String? = null) : ServiceResult<T>(message = message)
 }
+
+
+enum class SearchAppBarState {
+    OPENED,
+    CLOSED,
+    TRIGGERED
+}
+
+enum class TrailingIconState {
+    READY_TO_DELETE,
+    READY_TO_CLOSE
+}
+
+val TOP_APP_BAR_HEIGHT = 56.dp
+
+val TONAL_ELEVATION = 8.dp

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ import me.adipiscing_elit.hewahbnb.data.dtos.responses.SignUpResDTO
 import me.adipiscing_elit.hewahbnb.data.repository.HBRepository
 import javax.inject.Inject
 import me.adipiscing_elit.hewahbnb.util.Result
+import me.adipiscing_elit.hewahbnb.util.SearchAppBarState
 
 @HiltViewModel
 class HBViewModel @Inject constructor(
@@ -46,32 +48,35 @@ class HBViewModel @Inject constructor(
 
 
 
+    val searchAppBarState: MutableState<SearchAppBarState> =
+        mutableStateOf(SearchAppBarState.CLOSED)
 
-
+    val searchTextState: MutableState<String> =
+        mutableStateOf("")
 
 
     suspend fun signUpUser() {
         _createdUser.value = Result.Loading
         isUserCreated.value = false
 
-        viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val createdUser = viewModelScope.async(Dispatchers.IO) {
+                Log.d("SIGNUP_VM", SignUpReqDTO(
+                    email = email.value,
+                    fullName = fullName.value,
+                    mpesaNumber = mpesaNumber.value,
+                    password = password.value,
+                    userName = email.value
+                ).toString())
 
-            Log.d("SIGNUP_VM", SignUpReqDTO(
-                email = email.value,
-                fullName = fullName.value,
-                mpesaNumber = mpesaNumber.value,
-                password = password.value,
-                userName = email.value
-            ).toString()
-            )
-
-            val createdUser = repository.signUp(
-                fullName = fullName.value,
-                mpesaNumber = mpesaNumber.value,
-                email = email.value,
-                password = password.value,
-                userName = email.value
-            )
+                repository.signUp(
+                    fullName = fullName.value,
+                    mpesaNumber = mpesaNumber.value,
+                    email = email.value,
+                    password = password.value,
+                    userName = email.value
+                )
+            }.await()
 
             if (createdUser != null) {
                 _createdUser.value = Result.Success(data = createdUser)
@@ -86,41 +91,50 @@ class HBViewModel @Inject constructor(
 
                 Log.e("SIGNUP_VM", _createdUser.value.toString())
             }
-
+        } catch (e: Exception) {
+            // Handle exceptions if any
+            Log.e("SIGNUP_VM", "Exception: ${e.message}")
+            errorMessage.value = "Something went wrong. User not created: ${e.message}"
         }
-
     }
+
     suspend fun loginUser() {
+        try {
+            val loggedInUser = viewModelScope.async(Dispatchers.IO) {
+                Log.d("LOGIN_VM", LoginReqDTO(
+                    password = password.value,
+                    userName = email.value
+                ).toString())
 
-        viewModelScope.launch(Dispatchers.IO) {
-
-            Log.d("LOGIN_VM", LoginReqDTO(
-                password = password.value,
-                userName = email.value
-            ).toString()
-            )
-
-            val loggedInUser = repository.login(
-                userName = email.value,
-                password = password.value,
-            )
+                repository.login(
+                    userName = email.value,
+                    password = password.value
+                )
+            }.await()
 
             if (loggedInUser != null) {
                 _loggedInUser.value = Result.Success(data = loggedInUser)
                 sessionToken.value = loggedInUser.sessionToken
 
-                Log.d("LOGIN_VM", _createdUser.value.toString())
+                Log.d("LOGIN_VM", _loggedInUser.value.toString())
             } else {
                 Result.Error(message = "Something went wrong. Unable to Login")
                 errorMessage.value = "Something went wrong. Unable to Login"
 
                 Log.e("LOGIN_VM", _loggedInUser.value.toString())
             }
-
+        } catch (e: Exception) {
+            // Handle exceptions if any
+            Log.e("LOGIN_VM", "Exception: ${e.message}")
+            errorMessage.value = "Something went wrong. Unable to Login: ${e.message}"
         }
+    }
+
+
+    fun fetchSearchedHouses(queryLocation: String) {
+
 
     }
 
+
 }
-
-
