@@ -14,7 +14,7 @@ fun showToast(context: android.content.Context, message: String) {
     toast.show()
 }
 
-const val LOGIN_SCREEN = "login"
+const val LOGIN_SCREEN = "Login"
 
 const val SIGNUP_SCREEN = "signUp"
 
@@ -31,7 +31,7 @@ sealed class HBAPIEndpoints(val url: String) {
 
     object SignUpUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/users")
 
-    object LoginUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/login")
+    object LoginUser : HBAPIEndpoints(url = "$BASE_SERVER_URL/Login")
 }
 
 sealed class ServiceResult<T>(

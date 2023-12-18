@@ -1,4 +1,4 @@
-package me.adipiscing_elit.hewahbnb.navigation.graphs
+package me.adipiscing_elit.hewahbnb.navigation
 
 import androidx.navigation.NavController
 import me.adipiscing_elit.hewahbnb.util.HOME_SCREEN
@@ -8,7 +8,7 @@ import me.adipiscing_elit.hewahbnb.util.SIGNUP_SCREEN
 class Screens(navController: NavController) {
 
     val login: () -> Unit = {
-        navController.navigate("login") {
+        navController.navigate("Login") {
             popUpTo(LOGIN_SCREEN) {
                 inclusive = true
             }

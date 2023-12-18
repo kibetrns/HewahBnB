@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.plus
@@ -23,6 +24,7 @@ import me.adipiscing_elit.hewahbnb.data.model.HouseOwner
 import me.adipiscing_elit.hewahbnb.data.model.HouseType
 import me.adipiscing_elit.hewahbnb.data.model.Location
 import me.adipiscing_elit.hewahbnb.data.model.PayFrequency
+import me.adipiscing_elit.hewahbnb.ui.components.BottomNavBar
 import me.adipiscing_elit.hewahbnb.ui.components.HomeTopAppBar
 import me.adipiscing_elit.hewahbnb.viewmodel.HBViewModel
 
@@ -30,7 +32,8 @@ import me.adipiscing_elit.hewahbnb.viewmodel.HBViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    hbViewModel: HBViewModel
+    hbViewModel: HBViewModel,
+    navController: NavHostController,
 ) {
 
     val houses = listOf(
@@ -164,19 +167,23 @@ fun HomeScreen(
                 houses = houses,
                 innerPadding = innerPadding
             )
+        },
+        bottomBar = {
+            BottomNavBar(navController = navController)
         }
     )
 }
 
 
-@Preview(name = "HomeScreenPreview", showBackground = true, showSystemUi = true)
-@Composable
-fun  pHomeScreen() {
-    val hbViewModel = hiltViewModel<HBViewModel>()
-
-    HomeScreen(
-        hbViewModel = hbViewModel
-    )
-
-
-}
+//@Preview(name = "HomeScreenPreview", showBackground = true, showSystemUi = true)
+//@Composable
+//fun  pHomeScreen() {
+//    val hbViewModel = hiltViewModel<HBViewModel>()
+//
+//    HomeScreen(
+//        hbViewModel = hbViewModel,
+//
+//    )
+//
+//
+//}
