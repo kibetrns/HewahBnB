@@ -30,4 +30,11 @@
     <string name="seach_by_location">Search By Location\n</string>
     <string name="close_icon">Close Icon\n</string>
     <string name="navigation_icon">Navigation Icon</string>
+    <string name="star_icon">Star Icon\n</string>
+    <string name="phone_icon">Phone Icon\n</string>
+    <string name="calendarMonthIcon">Calendar Month Icon</string>
+    <string name="accessTimeIcon">Access Time Icon</string>
+    <string name="dropDownIcon">Drop Down Icon</string>
+    <string name="arrowBack">Arrow Back Icon</string>
+    <string name="sendIcon">Send Icon\n</string>
 </resources>
