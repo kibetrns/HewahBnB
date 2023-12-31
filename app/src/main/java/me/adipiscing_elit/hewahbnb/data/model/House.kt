@@ -3,6 +3,7 @@ package me.adipiscing_elit.hewahbnb.data.model
 import androidx.compose.ui.graphics.painter.Painter
 
 data class House(
+    val houseId: String,
     val images: List<Painter>, //TODO("Change this to a list of String")
     val name: String,
     val locationName: String,

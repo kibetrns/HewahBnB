@@ -198,44 +198,48 @@ fun LoginScreen(
                 modifier = Modifier
                     .padding(top = 16.dp),
                 onClick = {
+                    navigateToHomeScreen()
                     /*TODO(
-                       1.) Fix the button being clicked more than once for navigation to work.
-                       2) Fix the toast not showing when the result is success and when
-                       there is an error
+                       1.) Fix the button being clicked at least twice for navigation to work.
+                       2) Fix the toast not showing when the result is an error
                        3.) Handle input fields validations
                      */
-                    isLoading = true
 
-                    scope.launch {
-
-                        val signUpResult = async {
-                            hbViewModel.loginUser()
-                        }
-
-                        signUpResult.await()
-                    }
-
-                    when (loginUser) {
-                        is Result.Success -> {
-                            isLoading = false
-                            showToast(context, "Login Success")
-                            navigateToHomeScreen()
-                        }
-
-                        is Result.Loading -> {
-                            isLoading = true
-                        }
-
-                        is Result.Error -> {
-                            showToast(context, errorMessage)
-                            Log.d("LoginScreen", errorMessage)
-                            isLoading = false
-                        }
-
-                        else -> {
-
-                        }
-                    }
+                    
+//                    isLoading = true
+//
+//                    scope.launch {
+//
+//
+//
+//                        val signUpResult = async {
+//                            hbViewModel.loginUser()
+//                        }
+//
+//                        signUpResult.await()
+//                    }
+//
+//                    when (loginUser) {
+//                        is Result.Success -> {
+//                            isLoading = false
+//                            showToast(context, "Login Success")
+//                            navigateToHomeScreen()
+//                        }
+//
+//                        is Result.Loading -> {
+//                            isLoading = true
+//                        }
+//
+//                        is Result.Error -> {
+//                            showToast(context, errorMessage)
+//                            Log.d("LoginScreen", errorMessage)
+//                            isLoading = false
+//                        }
+//
+//                        else -> {
+//
+//                        }
+//                    }
                 }
 
             ) {

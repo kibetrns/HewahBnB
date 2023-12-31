@@ -1,12 +1,11 @@
 package me.adipiscing_elit.hewahbnb.ui
 
-import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import kotlinx.datetime.Clock
@@ -26,19 +25,16 @@ import me.adipiscing_elit.hewahbnb.data.model.Location
 import me.adipiscing_elit.hewahbnb.data.model.PayFrequency
 import me.adipiscing_elit.hewahbnb.data.model.RatingScore
 import me.adipiscing_elit.hewahbnb.ui.components.BottomNavBar
-import me.adipiscing_elit.hewahbnb.ui.components.HomeScreenContent
-import me.adipiscing_elit.hewahbnb.ui.components.HomeTopAppBar
-import me.adipiscing_elit.hewahbnb.viewmodel.HBViewModel
+import me.adipiscing_elit.hewahbnb.ui.components.HouseDetailsContent
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    hbViewModel: HBViewModel,
+fun HouseDetailsScreen(
     navController: NavHostController,
-    navigateToMostPopularListScreen: () -> Unit,
-    navigateToRecommendedListScreen: () -> Unit,
-    navigateToHouseDetailsScreen: (String) -> Unit
+    houseId: String,
+    navigateToReviewsScreen: (houseId: String) -> Unit
 ) {
 
     val houses = listOf(
@@ -53,11 +49,7 @@ fun HomeScreen(
             amount = 1200.0,
             payFrequency = PayFrequency.MONTHLY,
             availability = Availability.AVAILABLE,
-            description = "Sed accumsan sed magna sit amet tincidunt. Donec feugiat nibh eget " +
-                    "dui blandit, sed fermentum nibh faucibus. Suspendisse hendrerit a nisl non" +
-                    " rutrum. Etiam laoreet nec elit sed convallis. Mauris efficitur felis " +
-                    "dui, ac feugiat odio commodo id. Phasellus faucibus iaculis turpis eget" +
-                    " consequat. Morbi feugiat finibus odio at feugiat",
+            description = "A beautiful cottage in a peaceful village.",
             owner = HouseOwner(
                 name = "John Doe",
                 properties = emptyList(),
@@ -223,25 +215,16 @@ fun HomeScreen(
 
     )
 
-    val searchAppBarState by hbViewModel.searchAppBarState
-    val searchTextState by hbViewModel.searchTextState
-
     Scaffold(
         topBar = {
-            TopAppBar(title = { /*TODO*/ })
-            HomeTopAppBar(
-                searchAppBarState = searchAppBarState,
-                searchTextState = searchTextState,
-                hbViewModel = hbViewModel
-            )
+
         },
-        content = { innerPadding: PaddingValues ->
-            HomeScreenContent(
-                houses = houses,
-                innerPadding = innerPadding,
-                navigateToMostPopularListScreen = navigateToMostPopularListScreen,
-                navigateToRecommendedListScreen = navigateToRecommendedListScreen,
-                navigateToHouseDetailsScreen = navigateToHouseDetailsScreen
+        content = { contentPadding: PaddingValues ->
+            HouseDetailsContent(
+                house = houses[1],
+                contentPadding = contentPadding,
+                onAddToPhoneIconClicked = {},
+                navigateToReviewsScreen = navigateToReviewsScreen
             )
         },
         bottomBar = {
@@ -249,17 +232,3 @@ fun HomeScreen(
         }
     )
 }
-
-
-//@Preview(name = "HomeScreenPreview", showBackground = true, showSystemUi = true)
-//@Composable
-//fun  pHomeScreen() {
-//    val hbViewModel = hiltViewModel<HBViewModel>()
-//
-//    HomeScreen(
-//        hbViewModel = hbViewModel,
-//
-//    )
-//
-//
-//}

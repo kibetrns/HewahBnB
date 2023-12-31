@@ -1,7 +1,10 @@
 package me.adipiscing_elit.hewahbnb.util
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.LocalDateTime
 
 fun showToast(context: android.content.Context, message: String) {
     val density = context.resources.displayMetrics.density
@@ -57,3 +60,10 @@ enum class TrailingIconState {
 val TOP_APP_BAR_HEIGHT = 56.dp
 
 val TONAL_ELEVATION = 8.dp
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun formattedDateTime(dateTime: LocalDateTime?): String {
+
+    return ("${dateTime?.dayOfMonth}/${dateTime?.date?.month?.value}/${dateTime?.year}")
+
+}

@@ -18,9 +18,10 @@ fun NavGraphBuilder.homeScreen(
         route = HOME_SCREEN,
     ) {
 
-        HomeScreen(
-            hbViewModel = hbViewModel,
-            navController = navController
-        )
+//        HomeScreen(
+//            hbViewModel = hbViewModel,
+//            navController = navController,
+//            ,
+//        )
     }
 }

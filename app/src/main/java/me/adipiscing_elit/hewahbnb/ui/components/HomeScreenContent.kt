@@ -1,4 +1,4 @@
-package me.adipiscing_elit.hewahbnb.ui
+package me.adipiscing_elit.hewahbnb.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,13 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.adipiscing_elit.hewahbnb.data.model.House
-import me.adipiscing_elit.hewahbnb.ui.components.PopularHouseCard
-import me.adipiscing_elit.hewahbnb.ui.components.RecommendedHouseCard
 
 @Composable
 fun HomeScreenContent(
     houses: List<House>,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    navigateToMostPopularListScreen: () -> Unit,
+    navigateToRecommendedListScreen: () -> Unit,
+    navigateToHouseDetailsScreen: (String) -> Unit
 ) {
     LazyColumn(contentPadding = innerPadding) {
         item {
@@ -36,7 +37,7 @@ fun HomeScreenContent(
                 Text(text = "Most Popular", style = MaterialTheme.typography.titleLarge)
 
                 TextButton(
-                    onClick = {}
+                    onClick = navigateToMostPopularListScreen
                 ) {
                     Text(
                         text = "View more",
@@ -52,7 +53,9 @@ fun HomeScreenContent(
                     PopularHouseCard(
                         house = house,
                         isFavorite = true,
-                        onAddToFavouritesClicked = {}
+                        onAddToFavouritesClicked = {},
+                        navigateToHouseDetailsScreen = navigateToHouseDetailsScreen,
+
                     )
                 }
             }
@@ -69,7 +72,7 @@ fun HomeScreenContent(
                 Text(text = "Recommended", style = MaterialTheme.typography.titleLarge)
 
                 TextButton(
-                    onClick = {}
+                    onClick = navigateToRecommendedListScreen
                 ) {
                     Text(
                         text = "View all",
@@ -86,11 +89,11 @@ fun HomeScreenContent(
                     RecommendedHouseCard(
                         house = house,
                         isFavorite = false,
-                        onAddToFavouritesClicked = {}
+                        onAddToFavouritesClicked = {},
+                        navigateToHouseDetailsScreen = navigateToHouseDetailsScreen
                     )
                 }
             }
         }
     }
-
 }

@@ -223,10 +223,11 @@ fun SignUpScreen(
                     .padding(top = 16.dp),
                 onClick = {
                     /*TODO(
-                       1.) Fix the button being clicked more than once for navigation to work.
+                       1.) Fix the button being clicked clicked even though a user is created successfully.
                        2) Fix the toast not showing when the result is success and when
                        there is an error
                        3.) Handle input fields validations
+                       4.) Fix the NPE, that occurs on the mpesaPhoneNumber field.
                      */
                     isLoading = true
 

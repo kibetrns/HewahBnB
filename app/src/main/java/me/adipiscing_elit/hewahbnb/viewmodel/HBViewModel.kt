@@ -11,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import me.adipiscing_elit.hewahbnb.data.dtos.requests.LoginReqDTO
 import me.adipiscing_elit.hewahbnb.data.dtos.requests.SignUpReqDTO
 import me.adipiscing_elit.hewahbnb.data.dtos.responses.LoginResDTO
 import me.adipiscing_elit.hewahbnb.data.dtos.responses.SignUpResDTO
+import me.adipiscing_elit.hewahbnb.data.model.RatingScore
 import me.adipiscing_elit.hewahbnb.data.repository.HBRepository
 import javax.inject.Inject
 import me.adipiscing_elit.hewahbnb.util.Result
@@ -27,15 +27,20 @@ class HBViewModel @Inject constructor(
 
 ) : ViewModel() {
 
+
     var password: MutableState<String> = mutableStateOf("")
     var email: MutableState<String> = mutableStateOf("")
     var fullName: MutableState<String> = mutableStateOf("")
     var mpesaNumber: MutableState<Long> = mutableLongStateOf(25475678910)
     var confirmedPassword: MutableState<String> = mutableStateOf("")
 
+
     val  errorMessage = mutableStateOf("")
 
     var isUserCreated: MutableState<Boolean> = mutableStateOf(false)
+
+    var reviewDescription: MutableState<String> = mutableStateOf("")
+    var ratingScore: MutableState<RatingScore> = mutableStateOf(RatingScore.FIVE)
 
 
     private val _createdUser = MutableStateFlow<Result<SignUpResDTO>>(Result.Idle)
@@ -53,6 +58,12 @@ class HBViewModel @Inject constructor(
 
     val searchTextState: MutableState<String> =
         mutableStateOf("")
+
+
+
+
+
+
 
 
     suspend fun signUpUser() {
@@ -135,6 +146,14 @@ class HBViewModel @Inject constructor(
 
 
     }
+
+    suspend fun  fetchSingleHouse(houseId: String) {
+
+    }
+
+
+
+
 
 
 }

@@ -1,8 +1,10 @@
 package me.adipiscing_elit.hewahbnb.ui.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,12 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,130 +42,139 @@ import me.adipiscing_elit.hewahbnb.data.model.HouseOwner
 import me.adipiscing_elit.hewahbnb.data.model.HouseType
 import me.adipiscing_elit.hewahbnb.data.model.Location
 import me.adipiscing_elit.hewahbnb.data.model.PayFrequency
-import me.adipiscing_elit.hewahbnb.ui.theme.HewahBnBTheme
 import kotlin.time.Duration
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PopularHouseCard(
     house: House,
     isFavorite: Boolean,
-    onAddToFavouritesClicked: () -> Unit
+    onAddToFavouritesClicked: () -> Unit,
+    navigateToHouseDetailsScreen: (houseId: String) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 8.dp, vertical = 0.dp)
-            .size(width = 300.dp, height = 500.dp)
-            .background(
-            color = Color.Unspecified,
-            shape = MaterialTheme.shapes.medium.copy(
-                bottomEnd = CornerSize(8.dp),
-                bottomStart = CornerSize(8.dp),
-                topEnd = CornerSize(8.dp),
-                topStart = CornerSize(8.dp)
-            ),
-        ),
-    ) {
-        HouseImageContainer(house = house,
-            isFavorite = isFavorite,
-            modifier = Modifier
-                .fillMaxWidth(),
-            onAddToFavouritesClicked = onAddToFavouritesClicked
-        )
-
-            //TODO("have this reflect the design more; rouded corner etc")
 
         Column(
             modifier = Modifier
-                .border(BorderStroke(width = 1.dp, color = Color.Black))
-
+                .padding(horizontal = 8.dp, vertical = 0.dp)
+                .width(width = 300.dp,)
+                .background(
+                    color = Color.Unspecified,
+                    shape = MaterialTheme.shapes.medium.copy(
+                        bottomEnd = CornerSize(8.dp),
+                        bottomStart = CornerSize(8.dp),
+                        topEnd = CornerSize(8.dp),
+                        topStart = CornerSize(8.dp)
+                    ),
+                )
+                .clickable(onClick = {
+                    navigateToHouseDetailsScreen(house.houseId)
+                })
+            ,
         ) {
+            HouseImageContainer(
+                house = house,
+                isFavorite = isFavorite,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onAddToFavouritesClicked = onAddToFavouritesClicked
+            )
+
+            //TODO("have this reflect the design more; rouded corner etc")
+
             Column(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .border(BorderStroke(width = 1.dp, color = Color.Black))
+
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .padding(16.dp)
                 ) {
-                    Text(
-                        text = house.name,
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-
-                    Row {
-                        Icon(
-                            imageVector = Icons.Default.Star,
-                            tint = Color(0xFFFFD600),
-                            contentDescription = stringResource(id = R.string.ratingScore)
-                        )
-                        Text(text = "${house.rating}")
-                    }
-                }
-
-                Spacer(
-                    Modifier
-                        .height(8.dp)
-                        .padding(8.dp)
-                )
-
-                Text(text = house.locationName, style = MaterialTheme.typography.labelLarge)
-
-                Spacer(
-                    Modifier
-                        .height(8.dp)
-                        .padding(8.dp)
-                )
-
-                Divider(
-                    color = Color.LightGray,
-                    thickness = 1.dp,
-                )
-
-                Spacer(
-                    Modifier
-                        .height(8.dp)
-                        .padding(8.dp)
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Row {
-                        Icon(
-                            imageVector = Icons.Default.LocationOn,
-                            contentDescription = stringResource(id = R.string.location_icon),
-                            tint = Color(0xFFD20000),
-                            modifier = Modifier
-                                .size(16.dp)
-                        )
-                        //TODO("Dynamically have this calculated)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
                         Text(
-                            text = "2KM From Your Location",
-                            style = MaterialTheme.typography.labelSmall
+                            text = house.name,
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+
+                        Row {
+                            Icon(
+                                imageVector = Icons.Default.Star,
+                                tint = Color(0xFFFFD600),
+                                contentDescription = stringResource(id = R.string.ratingScore)
+                            )
+                            Text(text = "${house.rating}")
+                        }
+                    }
+
+                    Spacer(
+                        Modifier
+                            .height(8.dp)
+                            .padding(8.dp)
+                    )
+
+                    Text(text = house.locationName, style = MaterialTheme.typography.labelLarge)
+
+                    Spacer(
+                        Modifier
+                            .height(8.dp)
+                            .padding(8.dp)
+                    )
+
+                    Divider(
+                        color = Color.LightGray,
+                        thickness = 1.dp,
+                    )
+
+                    Spacer(
+                        Modifier
+                            .height(8.dp)
+                            .padding(8.dp)
+                    )
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = stringResource(id = R.string.location_icon),
+                                tint = Color(0xFFD20000),
+                                modifier = Modifier
+                                    .size(16.dp)
+                            )
+                            //TODO("Dynamically have this calculated)
+                            Text(
+                                text = "2KM From Your Location",
+                                style = MaterialTheme.typography.labelSmall
+                            )
+                        }
+                        Text(
+                            text = "KES ${house.amount}",
+                            color = Color(0xFFF82500),
+                            style = MaterialTheme.typography.labelMedium
                         )
                     }
-                    Text(
-                        text = "KES ${house.amount}",
-                        color = Color(0xFFF82500),
-                        style = MaterialTheme.typography.labelMedium
-                    )
                 }
             }
         }
-    }
 }
 
+@SuppressLint("SuspiciousIndentation")
 @Preview(name = "HouseImagePreview", showBackground = true, showSystemUi = true)
 @Composable
 fun pPopularHouseCard() {
 
     val house = House(
-        images = listOf(painterResource(id = R.drawable.big_buck_bunny)),
+        houseId = "CsmVXCXDqf1",
+        images = listOf(painterResource(id = R.drawable.neon2)),
         name = "Cozy Cottage",
         locationName = "Serene Village",
         location = Location(latitude = 40.0, longitude = -30.0),
@@ -176,9 +188,10 @@ fun pPopularHouseCard() {
             name = "John Doe",
             properties = emptyList(),
             email = "john@example.com",
-            mobileNumber = "+123456789"
-        ),
-        reviews = emptyList(),  // Assuming no reviews initially.
+            mobileNumber = "+123456789",
+            profilePhoto = painterResource(id = R.drawable.dp_4)
+        ),  // Assuming no reviews initially.
+        reviews = emptyList(),
         amenities = listOf(
             Amenity("WiFi", "High-speed internet connection"),
             Amenity("Parking", "Private parking space"),
@@ -198,11 +211,10 @@ fun pPopularHouseCard() {
         )
     )
 
-    HewahBnBTheme {
         PopularHouseCard(
             house = house,
             isFavorite = true,
-            onAddToFavouritesClicked = {}
+            onAddToFavouritesClicked = {},
+            navigateToHouseDetailsScreen = {}
         )
-    }
 }

@@ -79,40 +79,42 @@ fun HouseImageContainer(
 fun pHouseImage() {
 
     val house = House(
+        houseId = "CsmVXCXDqf1",
         images = listOf(painterResource(id = R.drawable.neon2)),
         name = "Cozy Cottage",
         locationName = "Serene Village",
-    location = Location(latitude = 40.0, longitude = -30.0),
-    distFrmMe = 10.5,
-    rating = 4,
-    amount = 1200.0,
-    payFrequency = PayFrequency.MONTHLY,
-    availability = Availability.AVAILABLE,
-    description = "A beautiful cottage in a peaceful village.",
-    owner = HouseOwner(
-        name = "John Doe",
-        properties = emptyList(),
-        email = "john@example.com",
-        mobileNumber = "+123456789"
-    ),
-    reviews = emptyList(),  // Assuming no reviews initially.
-    amenities = listOf(
-        Amenity("WiFi", "High-speed internet connection"),
-        Amenity("Parking", "Private parking space"),
-    ),
-    houseType = HouseType.COTTAGE,
-    roomCount = 2,
-    bathroomsCount = 1,
-    size = 80.0,
-    furnishType = FurnishType.FULLYFURNISHED,
-    houseBooking = HouseBooking(
-        bookingId = "booking123",
-        checkIn = Clock.System.now(),
-        checkOut = Clock.System.now().plus(Duration.parse("86400")),
-        totalAmount = 1200,
-        customerId = "customer123",
-        houseOwnerId = "owner123"
-    )
+        location = Location(latitude = 40.0, longitude = -30.0),
+        distFrmMe = 10.5,
+        rating = 4,
+        amount = 1200.0,
+        payFrequency = PayFrequency.MONTHLY,
+        availability = Availability.AVAILABLE,
+        description = "A beautiful cottage in a peaceful village.",
+        owner = HouseOwner(
+            name = "John Doe",
+            properties = emptyList(),
+            email = "john@example.com",
+            mobileNumber = "+123456789",
+            profilePhoto = painterResource(id = R.drawable.dp_4)
+        ),  // Assuming no reviews initially.
+        reviews = emptyList(),
+        amenities = listOf(
+            Amenity("WiFi", "High-speed internet connection"),
+            Amenity("Parking", "Private parking space"),
+        ),
+        houseType = HouseType.COTTAGE,
+        roomCount = 2,
+        bathroomsCount = 1,
+        size = 80.0,
+        furnishType = FurnishType.FULLYFURNISHED,
+        houseBooking = HouseBooking(
+            bookingId = "booking123",
+            checkIn = Clock.System.now(),
+            checkOut = Clock.System.now().plus(Duration.parse("86400")),
+            totalAmount = 1200,
+            customerId = "customer123",
+            houseOwnerId = "owner123"
+        )
     )
 
     HewahBnBTheme {

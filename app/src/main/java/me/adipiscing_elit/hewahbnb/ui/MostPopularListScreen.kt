@@ -1,7 +1,8 @@
 package me.adipiscing_elit.hewahbnb.ui
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
@@ -26,19 +27,16 @@ import me.adipiscing_elit.hewahbnb.data.model.Location
 import me.adipiscing_elit.hewahbnb.data.model.PayFrequency
 import me.adipiscing_elit.hewahbnb.data.model.RatingScore
 import me.adipiscing_elit.hewahbnb.ui.components.BottomNavBar
-import me.adipiscing_elit.hewahbnb.ui.components.HomeScreenContent
 import me.adipiscing_elit.hewahbnb.ui.components.HomeTopAppBar
+import me.adipiscing_elit.hewahbnb.ui.components.ItemHouseCard
 import me.adipiscing_elit.hewahbnb.viewmodel.HBViewModel
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+fun MostPopularListScreen(
     hbViewModel: HBViewModel,
     navController: NavHostController,
-    navigateToMostPopularListScreen: () -> Unit,
-    navigateToRecommendedListScreen: () -> Unit,
-    navigateToHouseDetailsScreen: (String) -> Unit
+    navigateToHouseDetailsScreen: (houseId: String) -> Unit
 ) {
 
     val houses = listOf(
@@ -53,11 +51,11 @@ fun HomeScreen(
             amount = 1200.0,
             payFrequency = PayFrequency.MONTHLY,
             availability = Availability.AVAILABLE,
-            description = "Sed accumsan sed magna sit amet tincidunt. Donec feugiat nibh eget " +
-                    "dui blandit, sed fermentum nibh faucibus. Suspendisse hendrerit a nisl non" +
-                    " rutrum. Etiam laoreet nec elit sed convallis. Mauris efficitur felis " +
-                    "dui, ac feugiat odio commodo id. Phasellus faucibus iaculis turpis eget" +
-                    " consequat. Morbi feugiat finibus odio at feugiat",
+            description = "Sed accumsan sed magna sit amet tincidunt. Donec feugiat nibh eget dui" +
+                    " blandit, sed fermentum nibh faucibus. Suspendisse hendrerit a nisl" +
+                    " non rutrum. Etiam laoreet nec elit sed convallis. Mauris efficitur felis " +
+                    "dui, ac feugiat odio commodo id. Phasellus faucibus iaculis turpis" +
+                    " eget consequat. Morbi feugiat finibus odio at feugiat.",
             owner = HouseOwner(
                 name = "John Doe",
                 properties = emptyList(),
@@ -236,30 +234,20 @@ fun HomeScreen(
             )
         },
         content = { innerPadding: PaddingValues ->
-            HomeScreenContent(
-                houses = houses,
-                innerPadding = innerPadding,
-                navigateToMostPopularListScreen = navigateToMostPopularListScreen,
-                navigateToRecommendedListScreen = navigateToRecommendedListScreen,
-                navigateToHouseDetailsScreen = navigateToHouseDetailsScreen
-            )
+            LazyColumn(contentPadding = innerPadding) {
+                itemsIndexed(houses) { index, house ->
+                    ItemHouseCard(
+                        house = house,
+                        isFavorite = true,
+                        onAddToFavouritesClicked = {},
+                        navigateToHouseDetailsScreen = navigateToHouseDetailsScreen
+                    )
+                }
+            }
         },
         bottomBar = {
             BottomNavBar(navController = navController)
         }
     )
+
 }
-
-
-//@Preview(name = "HomeScreenPreview", showBackground = true, showSystemUi = true)
-//@Composable
-//fun  pHomeScreen() {
-//    val hbViewModel = hiltViewModel<HBViewModel>()
-//
-//    HomeScreen(
-//        hbViewModel = hbViewModel,
-//
-//    )
-//
-//
-//}

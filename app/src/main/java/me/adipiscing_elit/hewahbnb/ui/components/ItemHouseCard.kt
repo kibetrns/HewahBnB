@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,27 +20,28 @@ import androidx.compose.ui.unit.dp
 import me.adipiscing_elit.hewahbnb.data.model.House
 
 @Composable
-fun RecommendedHouseCard(
+fun ItemHouseCard(
     house: House,
     isFavorite: Boolean,
     onAddToFavouritesClicked: () -> Unit,
     navigateToHouseDetailsScreen: (houseId: String) -> Unit
 ) {
 
-    Column(
+    Row(
         modifier = Modifier
-            .padding(horizontal = 8.dp, vertical = 0.dp)
-            .width(300.dp)
+            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .fillMaxWidth()
             .clickable(onClick = {
                 navigateToHouseDetailsScreen(house.houseId)
-            })
+            }),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
 
         HouseImageContainer(
             house = house,
             isFavorite = isFavorite,
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(0.4f)
                 .background(
                     color = Color.Unspecified,
                     shape = MaterialTheme.shapes.medium.copy(
@@ -54,7 +54,15 @@ fun RecommendedHouseCard(
             onAddToFavouritesClicked = onAddToFavouritesClicked
         )
 
-        Column(modifier = Modifier.padding(vertical = 8.dp)) {
+        Column(
+            modifier = Modifier.padding(
+            start = 16.dp,
+            top = 0.dp,
+            end = 0.dp,
+            bottom = 0.dp
+        ),
+            verticalArrangement = Arrangement.SpaceAround
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
